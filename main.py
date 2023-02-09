@@ -16,6 +16,8 @@ from decoder import Decoder
 from model import ED
 from net_params import convlstm_encoder_params, convlstm_decoder_params, convgru_encoder_params, convgru_decoder_params
 from data.mm import MovingMNIST
+import matplotlib.pyplot as plt
+from   PIL import Image
 import torch
 from torch import nn
 from torch.optim import lr_scheduler
@@ -146,9 +148,24 @@ def train():
         # train the model #
         ###################
         t = tqdm(trainLoader, leave=False, total=len(trainLoader))
-        for i, (idx, targetVar, inputVar, _, _) in enumerate(t):
+        for i, (idx, targetVar, inputVar, ida, idb) in enumerate(t):
             inputs = inputVar.to(device)  # B,S,C,H,W
             label = targetVar.to(device)  # B,S,C,H,W
+            print(idx,targetVar.shape(),inputVar.shape(),ida,idb)
+            # 输出一副图像
+            # a=inputs.to(torch.device('cpu')).numpy()
+            # aa=a[:,:,0,:,:]
+            # bb=aa[1,1,:,:]
+            # b_max = np.max(bb)
+            # b_min = np.min(bb)
+            # new_bb = (bb-b_min)/(b_max-b_min)*255
+            # new_bb = new_bb.astype('uint8')
+            # img=Image.fromarray(np.uint8(new_bb))
+            # plt.imshow(new_bb[:])
+            # plt.show()
+            # # detected_shadow = transforms.ToPILImage()(new_bb)
+            # img.save("/ai/open11012/zhou/cld/convlstm-cld/images/pre2.png")
+            
             optimizer.zero_grad()
             net.train()
             pred = net(inputs)  # B,S,C,H,W

@@ -44,6 +44,10 @@ MovingMNIST(is_train=True,
 - n_frames_output: Number of output frames (int)
 - num_objects:  Number of digits in a frame (List) . [3] means there are 3 digits in each frame
 
+# mnist_test_seq.npy
+- (contains 10,000 sequences each of length 20 showing 2 digits moving in a 64 x 64 frame.)
+- 一个seq有二十个图片，前十帧为input，后十帧为target,一共有10000个sequence，每个图片的大小为64✖64
+
 ## Result
 
  ![Result](https://github.com/jhhuang96/ConvLSTM-PyTorch/tree/master/images/movingmnist.png)
